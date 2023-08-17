@@ -9,10 +9,11 @@ import FormButton from '../components/shared/FormButton.svelte';
 const subscriber = Astro.cookies.get('subscriber').value;
 
 if (!subscriber) {
-	return new Response(null, {
-		status: 404,
-		statusText: 'Not Found'
-	});
+	// return new Response(null, {
+	// 	status: 404,
+	// 	statusText: 'Not Found'
+	// });
+	return Astro.redirect('/');
 } else Astro.cookies.delete('subscriber', {path: '/success'});
 ---
 
@@ -23,7 +24,7 @@ if (!subscriber) {
 				<div>
 					<SuccessIcon size={50} />
 					<h1>Thanks for subscribing!</h1>
-					<p>A confirmation emai has heen sent to <span>{subscriber}</span>. Please open it and click the button inside to confirm your subscription.</p>
+					<p>A confirmation email has heen sent to <span>{subscriber}</span>. Please open it and click the button inside to confirm your subscription.</p>
 				</div>
 				<form method="get" action="/">
 					<FormButton title="Dismiss Message" />
@@ -48,7 +49,7 @@ if (!subscriber) {
 	}
 
 	h1 {
-		font-size: 3em;
+		font-size: 2.5em;
 		line-height: 1em;
 	}
 
@@ -74,11 +75,9 @@ if (!subscriber) {
 		}
 		
 		h1 {
-			font-size: 2.5em;
 			margin-top: 15px;
 		}
 	}
-
 </style>
 
 
