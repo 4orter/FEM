@@ -37,7 +37,7 @@ if (method === 'post') {
 
 		return Astro.redirect('/success');
     } catch (error) {
-    	formError = "Email must be a string and at least 5 characters long";
+    	formError = "Email must be valid and at least 5 characters long";
     	enteredValue = email;
     }
 } else if (method === 'get') {
