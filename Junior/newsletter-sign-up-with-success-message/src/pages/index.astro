@@ -1,0 +1,89 @@
+---
+export const prerender = false;
+
+import Layout from '../layouts/Layout.astro';
+import Card from '../components/shared/Card.svelte';
+import Form from '../components/shared/Form.svelte';
+import SpotlightDesktop from '../components/desktop/SpotlightDesktop.svelte';
+import SpotlightMobile from '../components/mobile/SpotlightMobile.svelte';
+import vine from '@vinejs/vine';
+
+let formError = '';
+let enteredValue = '';
+const method = Astro.request.method.toLowerCase();
+
+if (method === 'post') {
+	const form = await Astro.request.formData();
+	const email = form.get('email') as string;
+
+	if (!email) Astro.redirect('/');
+
+	const schema = vine.object({
+        email: vine.string().email().minLength(5)
+    });
+    const validator = vine.compile(schema);
+
+    try {
+        await validator.validate({schema, email});
+
+        Astro.cookies.set('subscriber', email, {
+	    	sameSite: 'lax',
+	    	path: '/success',
+	    	httpOnly: true
+	    });
+
+	    // Store email in database ...
+	    // Send confirmation email ....
+
+		return Astro.redirect('/success');
+    } catch (error) {
+    	formError = "Email must be a string and at least 5 characters long";
+    	enteredValue = email;
+    }
+} else if (method === 'get') {
+	formError = ''
+}
+---
+
+<Layout title="Newsletter Sign Up">
+	<Card maxWidth={950}>
+		<div class="desktop-content">
+			<Form
+				client:load
+				formError={formError}
+				defaultValue={enteredValue ?? null}
+			/>
+			<SpotlightDesktop />
+		</div>
+		<div class="mobile-content">
+			<SpotlightMobile />
+			<Form
+				client:load
+				formError={formError}
+				defaultValue={enteredValue ?? null}
+			/>
+		</div>
+	</Card>
+</Layout>
+
+<style>
+	div.desktop-content {
+		display: flex;
+		justify-content: space-between;
+	}
+	
+	div.mobile-content {
+		display: none;
+	}
+	
+	@media (max-width: 500px) {
+		div.desktop-content {
+			display: none;
+		}
+		
+		div.mobile-content {
+			display: flex;
+			flex-direction: column;
+		}
+	}
+</style>

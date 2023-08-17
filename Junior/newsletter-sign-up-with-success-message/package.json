@@ -1,0 +1,19 @@
+{
+  "name": "newsletter-sign-up-with-success-message",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/netlify": "^2.6.0",
+    "@astrojs/svelte": "^3.1.0",
+    "@vinejs/vine": "^1.6.0",
+    "astro": "^2.10.9",
+    "svelte": "^4.2.0"
+  }
+}
