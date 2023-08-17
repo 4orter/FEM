@@ -23,7 +23,7 @@
 			<ListItem content={item} />
 		{/each}
 	</ul>
-	<form id="form" method="post" action="/">
+	<form method="post" action="/">
 		{#if formError}
 			<FormInput
 				type="email"
