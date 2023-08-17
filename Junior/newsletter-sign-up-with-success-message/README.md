@@ -1,4 +1,4 @@
-# QR Code Component Solution (Frontend Mentor)
+# Newsletter Sign Up Solution (Frontend Mentor)
 
 This is my solution to the [Newsletter Sign Up Challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/newsletter-signup-form-with-success-message-3FC1AZbNrv), built with Astro SSR (for backend validation) and Svelte. Frontend Mentor helps improve frontend coding skills by challenging developers to build realistic projects.
 
