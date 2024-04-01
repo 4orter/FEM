@@ -21,8 +21,10 @@ pnpm-debug.log*
 # macOS-specific files
 .DS_Store
 
-# VS Code
+# Editors
 .vscode
+.idea
+.nova
 
 # Netlify
 .netlify
